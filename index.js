@@ -22,6 +22,9 @@ app.get("/", (req, res) => {
   res.send("server is running");
 });
 
+app.get("/FI", (req, res) => {
+  res.send("FI is working");
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
