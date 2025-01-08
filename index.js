@@ -1,23 +1,28 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
-const PORT = 3000; // Port for your server
-
+const PORT = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
 // Webhook endpoint
-app.post('/webhook-receiver', (req, res) => {
-    console.log('Webhook notification received!');
-    console.log('Headers:', req.headers);
-    console.log('Body:', req.body);
+app.post("/FI/Notification", (req, res) => {
+  console.log("Webhook notification received!");
+  console.log("Headers:", req.headers);
+  console.log("Body:", req.body);
 
-    // Send a response back to acknowledge the notification
-    res.status(200).send('Notification received!');
+  // Send a response back to acknowledge the notification
+  res.status(200).send("Notification received!");
+});
+
+app.get("/", (req, res) => {
+  res.send("server is running");
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
