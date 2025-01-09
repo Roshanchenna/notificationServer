@@ -22,6 +22,10 @@ app.get("/", (req, res) => {
   res.send("server is running and working fine, and Hi from Roshan Chenna");
 });
 
+app.get('/health', (req, res) => {
+  res.status(200).send('Healthy');
+});
+
 app.get("/FI", (req, res) => {
   res.send("FI is working");
 });
