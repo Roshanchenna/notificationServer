@@ -19,7 +19,7 @@ app.post("/FI/Notification", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("server is running and working fine");
+  res.send("server is running and working fine, and Hi from Roshan Chenna");
 });
 
 app.get("/FI", (req, res) => {
