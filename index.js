@@ -19,7 +19,7 @@ app.post("/FI/Notification", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("server is running");
+  res.send("server is running and working fine");
 });
 
 app.get("/FI", (req, res) => {
