@@ -15,7 +15,7 @@ const redisClient = redis.createClient({
   socket: {
     host: "redis-cache-for-test.sudini.ng.0001.aps1.cache.amazonaws.com",
     port: 6379,
-    timeout: 10000 // Set timeout to 10 seconds
+    timeout: 10000
   }
 });
 
@@ -38,9 +38,22 @@ app.post("/FI/Notification", (req, res) => {
   res.status(200).send("Notification received!");
 });
 
-app.get("/", (req, res) => {
-  res.send("Hi from the Server");
+// ... existing code ...
+
+app.get("/", async (req, res) => {
+  try {
+    const cacheKey = await redisClient.get("testKey");
+    if (cacheKey) return res.send("hi from the cached Key")
+    // Set a key-value pair in Redis
+    await redisClient.set("testKey", "Hello, Redis!");
+    res.send("Hi from the Server. Data cached in Redis.");
+  } catch (err) {
+    console.error("Error writing to Redis:", err);
+    res.status(500).send("Error writing to Redis");
+  }
 });
+
+// ... existing code ...
 
 app.get('/health', (req, res) => {
   res.status(200).send('Healthy');
