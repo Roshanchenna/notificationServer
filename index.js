@@ -13,23 +13,20 @@ app.use(bodyParser.json());
 // connection for redis
 const redisClient = redis.createClient({
   socket: {
-    host: 'master.redis-cache-1a-test.sudini.aps1.cache.amazonaws.com',
+    host: "redis-cache-for-test.sudini.ng.0001.aps1.cache.amazonaws.com",
     port: 6379,
-    connectTimeout: 10000
-  },
+    timeout: 10000 // Set timeout to 10 seconds
+  }
 });
-
-console.log('Attempting to connect to Redis...');
 
 (async () => {
   try {
     await redisClient.connect();
-    console.log('Connected to Redis');
-  } catch (error) {
-    console.error('Redis connection failed:', error);
+    console.log("redis connected")
+  } catch (err) {
+    console.log(err);
   }
 })();
-
 
 // Webhook endpoint
 app.post("/FI/Notification", (req, res) => {
