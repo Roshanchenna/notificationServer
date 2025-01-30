@@ -45,7 +45,7 @@ app.get("/", async (req, res) => {
     const cacheKey = await redisClient.get("testKey");
     if (cacheKey) return res.send("hi from the cached Key")
     // Set a key-value pair in Redis
-    await redisClient.set("testKey", "Hello, Redis!");
+    await redisClient.set("testKey", "Hello, Redis!", { EX: 10 });
     res.send("Hi from the Server. Data cached in Redis.");
   } catch (err) {
     console.error("Error writing to Redis:", err);
